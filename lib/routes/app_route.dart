@@ -1,3 +1,5 @@
+import 'package:expert_reach/ui/common/addinquiryscreen/add_inquiry_screen.dart';
+import 'package:expert_reach/ui/common/viewpostscreen/view_post_screen.dart';
 import 'package:get/get.dart';
 import 'package:expert_reach/ui/homescreen/home_screen.dart';
 import 'package:expert_reach/ui/loginscreen/login_screen.dart';
@@ -11,4 +13,8 @@ var appRoutes = [
   GetPage(name: "/register", page: () => RegisterScreen()),
   GetPage(name: "/home-screen", page: () => HomeScreen()),
   GetPage(name: "/settings", page: () => SettingsPage()),
+
+  //common
+  GetPage(name: "/view-post-screen", page: () => ViewPostScreen()),
+  GetPage(name: "/add-inquiry-screen", page: () => AddInquiryScreen()),
 ];

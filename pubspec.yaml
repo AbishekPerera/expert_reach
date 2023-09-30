@@ -21,6 +21,8 @@ dependencies:
   device_preview: ^1.1.0
   carousel_slider: ^4.2.1
   intl:
+  flutter_rating_bar: ^4.0.1
+  syncfusion_flutter_datepicker: ^23.1.38
 
 dev_dependencies:
   flutter_test:

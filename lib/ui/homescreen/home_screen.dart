@@ -1,29 +1,34 @@
+import 'package:expert_reach/ui/homescreen/findscreen/find_screen.dart';
+import 'package:expert_reach/ui/homescreen/inquiriesscreen/inquiries_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:expert_reach/constants/colors.dart';
 import 'package:expert_reach/controllers/home_screen/home_controller.dart';
-import 'package:expert_reach/ui/homescreen/classesscreen/classess_screen.dart';
 import 'package:expert_reach/ui/homescreen/dashboardscreen/dashboard_screen.dart';
 import 'package:expert_reach/ui/homescreen/profilescreen/profile_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:expert_reach/ui/drawer/drawer.dart' as custom_navigation_drawer;
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   final HomeController homeController = Get.put(HomeController());
 
-  final screens = [Dashboard(), ClassessScreen(), ProfileScreen()];
+  final screens = [
+    Dashboard(),
+    FindScreen(),
+    InquiriesScreen(),
+    ProfileScreen()
+  ];
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
-        drawer: custom_navigation_drawer.NavigationDrawer(),
         appBar: AppBar(
           // toolbarHeight: 60,
+          automaticallyImplyLeading: false,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20),
@@ -78,8 +83,13 @@ class HomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                   GButton(
-                    icon: Icons.school,
-                    text: 'Classes',
+                    icon: Icons.search,
+                    text: 'Find',
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  GButton(
+                    icon: Icons.message,
+                    text: 'Inquiries',
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                   GButton(

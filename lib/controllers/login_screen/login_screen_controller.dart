@@ -73,7 +73,7 @@ class LoginController extends GetxController {
   }
 
   Future loginToDashboard() async {
-    Get.toNamed("/register-phone");
+    Get.toNamed("/home-screen");
     isLoading.value = true;
 
     // final AuthService authService = AuthService();

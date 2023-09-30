@@ -1,9 +1,43 @@
+import 'package:expert_reach/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:expert_reach/constants/image_strings.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
+
+  final List<Map> _dashboardItems = [
+    {
+      "title": "Italian classes",
+      "subtitle": "this is a subtitle",
+      "image": adults1,
+    },
+    {
+      "title": "English classes",
+      "subtitle": "this is a subtitle",
+      "image": adults2,
+    },
+    {
+      "title": "Italian classes",
+      "subtitle": "this is a subtitle",
+      "image": avventura,
+    },
+    {
+      "title": "English classes",
+      "subtitle": "this is a subtitle",
+      "image": interaction,
+    },
+    {
+      "title": "Italian classes",
+      "subtitle": "this is a subtitle",
+      "image": maestri,
+    },
+    {
+      "title": "English classes",
+      "subtitle": "this is a subtitle",
+      "image": primipassi,
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -14,21 +48,20 @@ class ProfileScreen extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             height: screen_width * 0.35,
             width: double.infinity,
             decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(italianFlag),
-                    fit: BoxFit.cover,
-                    opacity: 0.9,
-                    alignment: Alignment.topCenter),
+                // image: DecorationImage(
+                //     image: AssetImage(italianFlag),
+                //     fit: BoxFit.cover,
+                //     opacity: 0.9,
+                //     alignment: Alignment.topCenter),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25),
-                  topRight: Radius.circular(25),
-                  bottomLeft: Radius.circular(25),
-                  bottomRight: Radius.circular(25),
-                )),
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
+              bottomLeft: Radius.circular(25),
+              bottomRight: Radius.circular(25),
+            )),
             child: Stack(
               children: [
                 Positioned(
@@ -74,7 +107,6 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: screen_width * 0.05),
 
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -84,21 +116,10 @@ class ProfileScreen extends StatelessWidget {
                 color: Get.isDarkMode ? Colors.black : Colors.grey[200],
                 borderRadius: BorderRadius.circular(10)),
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //Admin details
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Text(
-                        "Student Details",
-                        style: Theme.of(context).textTheme.displaySmall,
-                      ),
-                    ),
-
-                    const SizedBox(height: 10),
-
                     Material(
                       color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
                       shape: const RoundedRectangleBorder(
@@ -120,7 +141,6 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     const Divider(),
-
                     Material(
                       color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
                       shape: const RoundedRectangleBorder(
@@ -141,9 +161,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     const Divider(),
-
                     Material(
                       color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
                       shape: const RoundedRectangleBorder(
@@ -164,148 +182,179 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
-                    const Divider(),
-
-                    Material(
-                      color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      elevation: 2,
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.badge_outlined,
-                          size: 40,
-                        ),
-                        title: Text(
-                          "Student ID",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        subtitle: Text(
-                          "T001",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
-                    ),
-
-                    const Divider(),
-
-                    Material(
-                      color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      elevation: 2,
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.date_range,
-                          size: 40,
-                        ),
-                        title: Text(
-                          "Date of Birth",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        subtitle: Text(
-                          "1997-07-07",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
-                    ),
-
-                    const Divider(),
-
-                    Material(
-                      color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      elevation: 2,
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.wc_outlined,
-                          size: 40,
-                        ),
-                        title: Text(
-                          "Gender",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        subtitle: Text(
-                          "Male",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
-                    ),
-
-                    const Divider(),
-
-                    Material(
-                      color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      elevation: 2,
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.location_on_outlined,
-                          size: 40,
-                        ),
-                        title: Text(
-                          "Address",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        subtitle: Text(
-                          "No 10, Main Street, Colombo 10",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
-                    ),
                   ]),
             ),
           ),
 
-          SizedBox(height: screen_width * 0.05),
+          Divider(
+            color: Colors.grey,
+          ),
 
-          //logout button
-
-          Container(
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            width: double.infinity,
-            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-            decoration: BoxDecoration(
-                color: Get.isDarkMode ? Colors.black : Colors.grey[200],
-                borderRadius: BorderRadius.circular(10)),
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Your services",
+                    style: Theme.of(context).textTheme.displaySmall),
+
+                //add service button
+                OutlinedButton(
+                    onPressed: () {},
+                    child: const Row(
+                      children: [
+                        Icon(Icons.add),
+                        Text(
+                          "Add service",
+                        )
+                      ],
+                    )),
+              ],
+            ),
+          ),
+
+          ListView.builder(
+            itemCount: _dashboardItems.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 10,
+                      color: Colors.black26,
+                      offset: Offset(0, 5),
+                    )
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    //Admin details
-                    Text("Logout",
-                        style: Theme.of(context).textTheme.displaySmall),
-
-                    const SizedBox(height: 10),
-
-                    Material(
-                      color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      elevation: 2,
-                      child: ListTile(
-                        onTap: () {},
-                        leading: const Icon(
-                          Icons.logout,
-                          size: 40,
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey,
                         ),
-                        title: Text(
-                          "Logout",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        subtitle: Text(
-                          "Session expires on 2023",
-                          style: Theme.of(context).textTheme.titleSmall,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Image.asset(
+                        _dashboardItems[index]["image"],
+                        height: 100,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(
+                        height: 100,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              _dashboardItems[index]["title"],
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            Text(
+                              _dashboardItems[index]["subtitle"],
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    //edit icon
+                                    Material(
+                                      color: Colors.white,
+                                      type: MaterialType.transparency,
+                                      child: IconButton(
+                                        splashRadius: 20,
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          Icons.mode_edit_outlined,
+                                          color: cPrimaryColor,
+                                        ),
+                                      ),
+                                    ),
+
+                                    //delete icon
+                                    // Material(
+                                    //   color: Colors.white,
+                                    //   type: MaterialType.transparency,
+                                    //   child: IconButton(
+                                    //     splashRadius: 20,
+                                    //     onPressed: () {},
+                                    //     icon: const Icon(
+                                    //       Icons.delete_outline_outlined,
+                                    //       color: Colors.red,
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                  ]),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ]),
-            ),
+                  ],
+                ),
+              );
+            },
           ),
+          // //logout button
+
+          // Container(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+          //   width: double.infinity,
+          //   margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+          //   decoration: BoxDecoration(
+          //       color: Get.isDarkMode ? Colors.black : Colors.grey[200],
+          //       borderRadius: BorderRadius.circular(10)),
+          //   child: Container(
+          //     padding: const EdgeInsets.symmetric(vertical: 20),
+          //     child: Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           //Admin details
+          //           Text("Logout",
+          //               style: Theme.of(context).textTheme.displaySmall),
+
+          //           const SizedBox(height: 10),
+
+          //           Material(
+          //             color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
+          //             shape: const RoundedRectangleBorder(
+          //                 borderRadius: BorderRadius.all(Radius.circular(10))),
+          //             elevation: 2,
+          //             child: ListTile(
+          //               onTap: () {},
+          //               leading: const Icon(
+          //                 Icons.logout,
+          //                 size: 40,
+          //               ),
+          //               title: Text(
+          //                 "Logout",
+          //                 style: Theme.of(context).textTheme.titleMedium,
+          //               ),
+          //               subtitle: Text(
+          //                 "Session expires on 2023",
+          //                 style: Theme.of(context).textTheme.titleSmall,
+          //               ),
+          //             ),
+          //           ),
+          //         ]),
+          //   ),
+          // ),
 
           SizedBox(height: screen_width * 0.02),
         ],

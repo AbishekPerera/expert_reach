@@ -8,12 +8,12 @@ Widget buildCarouselItem({
 }) {
   return Material(
     elevation: 5.0,
-    borderRadius: BorderRadius.circular(20.0),
+    borderRadius: BorderRadius.circular(10.0),
     color: Colors.transparent,
     child: Container(
       margin: const EdgeInsets.all(1.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(10.0),
         image: DecorationImage(
           image: AssetImage(backgroundImage),
           fit: BoxFit.cover,
@@ -22,7 +22,7 @@ Widget buildCarouselItem({
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(10.0),
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

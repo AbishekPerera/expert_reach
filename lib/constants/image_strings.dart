@@ -37,6 +37,7 @@ const String reports = "assets/images/reports.png";
 const String profilesettings = "assets/images/profilesettings.png";
 
 const String calendarbg = "assets/images/calendarbg.jpg";
+const String addbookingbanner = "assets/images/addbookingbanner.jpg";
 
 //ads images
 const String adults1 = "assets/ads/adults1.jpeg";
