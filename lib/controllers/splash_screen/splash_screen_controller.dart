@@ -10,22 +10,19 @@ class SplashScreenController extends GetxController {
       const Duration(seconds: 4),
       () async {
         //check if user is logged in
-        //   final SharedPreferences userdata =
-        //       await SharedPreferences.getInstance();
-        //   token = userdata.getString('token');
-        //   expirationDate = userdata.getString('expirationDate');
+        final SharedPreferences userdata =
+            await SharedPreferences.getInstance();
+        token = userdata.getString('token');
+        expirationDate = userdata.getString('expirationDate');
 
-        //   if (token != null &&
-        //       expirationDate ==
-        //           "${DateTime.now().year}/${DateTime.now().month}") {
-        //     Get.offNamed("/dashboard");
-        //   } else {
-        //     await userdata.clear();
-        //     Get.offNamed("/dashboard");
-
-        //     Get.offNamed("/login");
-        //   }
-        //   Get.offNamed("/login");
+        if (token != null &&
+            expirationDate ==
+                "${DateTime.now().year}/${DateTime.now().month}") {
+          Get.offNamed("/home-screen");
+        } else {
+          await userdata.clear();
+          Get.offNamed("/login");
+        }
         Get.offNamed("/login");
       },
     );

@@ -1,3 +1,6 @@
+import 'package:expert_reach/services/auth_service.dart';
+import 'package:expert_reach/utils/theme/getError_snackBar.dart';
+import 'package:expert_reach/utils/theme/getSuccess_snackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,14 +47,6 @@ class LoginController extends GetxController {
     return null;
   }
 
-  // String? validateUserName(String value) {
-  //   if (value.length <= 3) {
-  //     return "Username must be of 3 chars";
-  //   }
-
-  //   return null;
-  // }
-
   //password validation
   String? validatePassword(String value) {
     if (value.length <= 4) {
@@ -73,47 +68,47 @@ class LoginController extends GetxController {
   }
 
   Future loginToDashboard() async {
-    Get.toNamed("/home-screen");
+    // Get.toNamed("/home-screen");
     isLoading.value = true;
 
-    // final AuthService authService = AuthService();
+    final AuthService authService = AuthService();
 
-    // var responseData = await authService.Login(userName, password);
-    // // print(responseData);
+    var responseData = await authService.Login(userName, password);
+    print(responseData);
 
-    // if (responseData['response']['state'] == 200) {
-    //   //when login success
+    if (responseData['response']['state'] == 200) {
+      //when login success
 
-    //   if (responseData['response']['results']['token'] != "" &&
-    //       responseData['response']['results']['loggedIn'] == true) {
-    //     // init shared preferences
-    //     SharedPreferences userdata = await SharedPreferences.getInstance();
-    //     userdata.setString(
-    //         "token", responseData['response']['results']['token']);
-    //     userdata.setString(
-    //         "email", responseData['response']['results']['email']);
-    //     userdata.setString(
-    //         "employee_id", responseData['response']['results']['employee_id']);
-    //     userdata.setString("name", responseData['response']['results']['name']);
-    //     userdata.setString(
-    //         "surname", responseData['response']['results']['surname']);
-    //     userdata.setString("dob", responseData['response']['results']['dob']);
-    //     userdata.setString(
-    //         "gender", responseData['response']['results']['gender']);
-    //     userdata.setString(
-    //         'expirationDate', "${DateTime.now().year}/${DateTime.now().month}");
+      if (responseData['response']['results']['token'] != "" &&
+          responseData['response']['results']['loggedIn'] == true) {
+        // init shared preferences
+        SharedPreferences userdata = await SharedPreferences.getInstance();
+        userdata.setString(
+            "token", responseData['response']['results']['token']);
+        userdata.setString(
+            "email", responseData['response']['results']['email']);
+        userdata.setString(
+            "first_name", responseData['response']['results']['first_name']);
+        userdata.setString(
+            "last_name", responseData['response']['results']['last_name']);
+        userdata.setString(
+            "phone", responseData['response']['results']['phone']);
+        userdata.setString(
+            "profile_img", responseData['response']['results']['profile_img']);
+        userdata.setString(
+            'expirationDate', "${DateTime.now().year}/${DateTime.now().month}");
 
-    //     getSuccessSnackBar("Welcome back!", "You have successfully logged in",
-    //         Icons.done_all_outlined);
+        getSuccessSnackBar("Welcome back!", "You have successfully logged in",
+            Icons.done_all_outlined);
 
-    //     Get.offNamed("/dashboard");
-    //   } else {
-    //     //Login Error
-    //     getErrorSnackBar("Error", "Authentication failed");
-    //   }
-    // } else {
-    //   getErrorSnackBar("Error", responseData['response']['results']);
-    // }
+        Get.offNamed("/home-screen");
+      } else {
+        //Login Error
+        getErrorSnackBar("Error", "Authentication failed");
+      }
+    } else {
+      getErrorSnackBar("Error", responseData['response']['results']);
+    }
     isLoading.value = false;
   }
 

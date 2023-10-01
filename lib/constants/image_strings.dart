@@ -1,4 +1,5 @@
 const String LogoPng = "assets/logo/logo.png";
+const String default_profile = "assets/logo/default_profile.jpeg";
 const String LogoJpg = "assets/logo/logo with bg.png";
 const String LogoWhite = "assets/logo/logo white.png";
 const String LogoLinear = "assets/logo/logo linear.png";

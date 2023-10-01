@@ -1,10 +1,14 @@
+import 'package:expert_reach/constants/api_endpoint.dart';
 import 'package:expert_reach/constants/colors.dart';
+import 'package:expert_reach/controllers/home_screen/profilescreen/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:expert_reach/constants/image_strings.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
+
+  final ProfileController profileController = Get.put(ProfileController());
 
   final List<Map> _dashboardItems = [
     {
@@ -65,22 +69,34 @@ class ProfileScreen extends StatelessWidget {
             )),
             child: Stack(
               children: [
-                Positioned(
-                  top: 10,
-                  left: screen_width * 0.33,
-                  child: Container(
-                    width: screen_width * 0.30,
-                    height: screen_width * 0.30,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Color.fromARGB(255, 172, 171, 171),
-                        width: 5.0,
+                Obx(
+                  () => Positioned(
+                    top: 10,
+                    left: screen_width * 0.33,
+                    child: Container(
+                      width: screen_width * 0.30,
+                      height: screen_width * 0.30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Color.fromARGB(255, 172, 171, 171),
+                          width: 5.0,
+                        ),
                       ),
-                    ),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      backgroundImage: const AssetImage(profile),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        backgroundImage: profileController.profilePic.value
+                                        .toString() ==
+                                    "null" ||
+                                profileController.profilePic.value.toString() ==
+                                    ""
+                            ? Image.asset(
+                                profile,
+                                fit: BoxFit.cover,
+                              ).image
+                            : NetworkImage(
+                                "$userImageURL${profileController.profilePic.value}"),
+                      ),
                     ),
                   ),
                 ),
@@ -112,7 +128,7 @@ class ProfileScreen extends StatelessWidget {
                   right: 10,
                   child: IconButton(
                     onPressed: () {
-                      Get.toNamed("/login-screen");
+                      profileController.logout();
                     },
                     icon: const Icon(
                       Icons.logout,
@@ -141,39 +157,23 @@ class ProfileScreen extends StatelessWidget {
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       elevation: 2,
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.person_outline_outlined,
-                          size: 40,
-                        ),
-                        title: Text(
-                          "Name",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        subtitle: Text(
-                          "sunera abishek perera",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
-                    ),
-                    const Divider(),
-                    Material(
-                      color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      elevation: 2,
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.email_outlined,
-                          size: 40,
-                        ),
-                        title: Text(
-                          "Email",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        subtitle: Text(
-                          "abhishekperera77@gmail.com",
-                          style: Theme.of(context).textTheme.titleMedium,
+                      child: Obx(
+                        () => ListTile(
+                          leading: const Icon(
+                            Icons.person_outline_outlined,
+                            size: 40,
+                          ),
+                          title: Text(
+                            "Name",
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                          subtitle: profileController.isLoading.value == true
+                              ? const LinearProgressIndicator()
+                              : Text(
+                                  "${profileController.firstName.value} ${profileController.lastName.value}",
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
                         ),
                       ),
                     ),
@@ -183,21 +183,50 @@ class ProfileScreen extends StatelessWidget {
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       elevation: 2,
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.contact_phone_outlined,
-                          size: 40,
-                        ),
-                        title: Text(
-                          "Phone",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        subtitle: Text(
-                          "0701273992",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
+                      child: Obx(() => ListTile(
+                            leading: const Icon(
+                              Icons.email_outlined,
+                              size: 40,
+                            ),
+                            title: Text(
+                              "Email",
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                            subtitle: profileController.isLoading.value == true
+                                ? const LinearProgressIndicator()
+                                : Text(
+                                    profileController.email.value,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                          )),
                     ),
+                    const Divider(),
+                    Material(
+                        color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        elevation: 2,
+                        child: Obx(
+                          () => ListTile(
+                            leading: const Icon(
+                              Icons.contact_phone_outlined,
+                              size: 40,
+                            ),
+                            title: Text(
+                              "Phone",
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                            subtitle: profileController.isLoading.value == true
+                                ? const LinearProgressIndicator()
+                                : Text(
+                                    profileController.phone.value,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                          ),
+                        )),
                   ]),
             ),
           ),
