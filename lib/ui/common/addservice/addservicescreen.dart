@@ -251,16 +251,18 @@ class AddServiceScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    SizedBox(
-                      width: double.infinity,
-                      child: addServiceScreenController.isLoading.value
-                          ? LinearProgressIndicator()
-                          : ElevatedButton(
-                              onPressed: () {
-                                addServiceScreenController.validate();
-                              },
-                              child: Text('Add Service'),
-                            ),
+                    Obx(
+                      () => SizedBox(
+                        width: double.infinity,
+                        child: addServiceScreenController.isLoading.value
+                            ? LinearProgressIndicator()
+                            : ElevatedButton(
+                                onPressed: () {
+                                  addServiceScreenController.validate();
+                                },
+                                child: Text('Add Service'),
+                              ),
+                      ),
                     ),
                   ]))
             ],
