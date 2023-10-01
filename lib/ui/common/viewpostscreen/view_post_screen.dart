@@ -313,10 +313,16 @@ class ViewPostScreen extends StatelessWidget {
                         margin: const EdgeInsets.all(5),
                         width: 150,
                         decoration: BoxDecoration(
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.grey,
-                          ),
+                          border: Border.all(color: cAccentColor),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 5,
+                              color: Colors.black26,
+                              offset: Offset(0, 3),
+                            )
+                          ],
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,

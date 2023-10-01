@@ -23,6 +23,8 @@ dependencies:
   intl:
   flutter_rating_bar: ^4.0.1
   syncfusion_flutter_datepicker: ^23.1.38
+  flutter_slidable: ^3.0.0
+  image_picker: ^1.0.4
 
 dev_dependencies:
   flutter_test:
@@ -34,7 +36,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/logo/logo with bg.jpg"
+  image_path: "assets/logo/logo with bg.png"
 
 flutter:
   uses-material-design: true

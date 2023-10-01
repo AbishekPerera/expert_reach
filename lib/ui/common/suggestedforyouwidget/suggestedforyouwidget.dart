@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 class SuggestedForYouWidget extends StatelessWidget {
@@ -75,22 +76,34 @@ class SuggestedForYouWidget extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 5),
-                            child: Row(
+                            child: //rating
+                                Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(
-                                    "4.5",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(color: Colors.grey),
+                                  RatingBar.builder(
+                                    itemSize: 15,
+                                    initialRating: 4,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    ignoreGestures: true,
+                                    itemBuilder: (context, _) => const Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
                                   ),
-                                  //star icon
-                                  const Icon(
-                                    Icons.star,
-                                    color: Colors.grey,
-                                  ),
-                                ]),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       ),

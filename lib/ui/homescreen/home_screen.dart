@@ -40,7 +40,9 @@ class HomeScreen extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed("/notifications");
+              },
               icon: const Icon(Icons.notifications),
             )
           ],

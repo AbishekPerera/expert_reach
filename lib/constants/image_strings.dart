@@ -38,6 +38,7 @@ const String profilesettings = "assets/images/profilesettings.png";
 
 const String calendarbg = "assets/images/calendarbg.jpg";
 const String addbookingbanner = "assets/images/addbookingbanner.jpg";
+const String notification = "assets/images/notification.png";
 
 //ads images
 const String adults1 = "assets/ads/adults1.jpeg";

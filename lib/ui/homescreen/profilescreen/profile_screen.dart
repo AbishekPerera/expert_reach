@@ -51,6 +51,7 @@ class ProfileScreen extends StatelessWidget {
             height: screen_width * 0.35,
             width: double.infinity,
             decoration: const BoxDecoration(
+                // color: cPrimaryColor,
                 // image: DecorationImage(
                 //     image: AssetImage(italianFlag),
                 //     fit: BoxFit.cover,
@@ -101,6 +102,21 @@ class ProfileScreen extends StatelessWidget {
                         color: Colors.white,
                         size: 20,
                       ),
+                    ),
+                  ),
+                ),
+
+                //logout button
+                Positioned(
+                  bottom: 5,
+                  right: 10,
+                  child: IconButton(
+                    onPressed: () {
+                      Get.toNamed("/login-screen");
+                    },
+                    icon: const Icon(
+                      Icons.logout,
+                      color: Colors.red,
                     ),
                   ),
                 ),
@@ -200,7 +216,9 @@ class ProfileScreen extends StatelessWidget {
 
                 //add service button
                 OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed("/add-service");
+                    },
                     child: const Row(
                       children: [
                         Icon(Icons.add),

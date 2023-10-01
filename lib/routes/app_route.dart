@@ -1,5 +1,7 @@
 import 'package:expert_reach/ui/common/addinquiryscreen/add_inquiry_screen.dart';
+import 'package:expert_reach/ui/common/addservice/addservicescreen.dart';
 import 'package:expert_reach/ui/common/viewpostscreen/view_post_screen.dart';
+import 'package:expert_reach/ui/notifications/notifications.dart';
 import 'package:get/get.dart';
 import 'package:expert_reach/ui/homescreen/home_screen.dart';
 import 'package:expert_reach/ui/loginscreen/login_screen.dart';
@@ -13,6 +15,8 @@ var appRoutes = [
   GetPage(name: "/register", page: () => RegisterScreen()),
   GetPage(name: "/home-screen", page: () => HomeScreen()),
   GetPage(name: "/settings", page: () => SettingsPage()),
+  GetPage(name: "/notifications", page: () => Notifications()),
+  GetPage(name: "/add-service", page: () => AddServiceScreen()),
 
   //common
   GetPage(name: "/view-post-screen", page: () => ViewPostScreen()),
