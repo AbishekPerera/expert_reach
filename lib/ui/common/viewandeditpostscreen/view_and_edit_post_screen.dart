@@ -2,7 +2,6 @@ import 'package:expert_reach/constants/api_endpoint.dart';
 import 'package:expert_reach/constants/colors.dart';
 import 'package:expert_reach/constants/image_strings.dart';
 import 'package:expert_reach/controllers/common/viewandeditpostscreen/viewandeditpostscreen_controller.dart';
-import 'package:expert_reach/models/data_classes/services__locations.dart';
 import 'package:expert_reach/ui/common/suggestedforyouwidget/suggestedforyouwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -62,7 +61,10 @@ class ViewAndEditPostScreen extends StatelessWidget {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.toNamed("/add-inquiry-screen");
+            Get.toNamed(
+              "/edit-post-screen",
+              arguments: _getxcontroller.arguments,
+            );
           },
           backgroundColor: cPrimaryColor,
           child: const Icon(

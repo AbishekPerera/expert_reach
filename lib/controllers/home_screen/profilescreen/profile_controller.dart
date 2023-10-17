@@ -44,6 +44,8 @@ class ProfileController extends GetxController {
 
     final response = await servicesService.getServicesByUserId();
 
+    // print(response);
+
     if (response != null) {
       if (response['response']['state'] == 200) {
         servicesList.clear();

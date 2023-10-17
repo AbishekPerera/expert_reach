@@ -137,4 +137,115 @@ class ServicesService extends SessionService {
       return null;
     }
   }
+
+//getAllServices
+  Future<dynamic> getAllServices() async {
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "getAllServices",
+          "param": {}
+        };
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  //updateService
+
+  Future<dynamic> updateService(
+      String id,
+      String serviceTitle,
+      String serviceDescription,
+      String locationId,
+      String servicePrice,
+      String base64image) async {
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "updateService",
+          "param": {
+            "service_id": id,
+            "title": serviceTitle,
+            "description": serviceDescription,
+            "location_id": locationId,
+            "rates": servicePrice,
+            "image": base64image
+          }
+        };
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  Future<dynamic> deleteService(String id) async {
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "deleteService",
+          "param": {
+            "service_id": id,
+          }
+        };
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 }
