@@ -1,6 +1,5 @@
 import 'package:expert_reach/constants/api_endpoint.dart';
 import 'package:expert_reach/constants/colors.dart';
-import 'package:expert_reach/constants/image_strings.dart';
 import 'package:expert_reach/controllers/home_screen/findscreen/findscreen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -11,68 +10,6 @@ class FindScreen extends StatelessWidget {
 
   final FindScreenController findScreenController =
       Get.put(FindScreenController());
-
-  final List<Map> _dashboardItems = [
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": adults1,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": adults2,
-    },
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": avventura,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": interaction,
-    },
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": maestri,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": primipassi,
-    }
-  ];
-
-  final List<String> districtNames = [
-    "All",
-    "Ampara",
-    "Anuradhapura",
-    "Badulla",
-    "Batticaloa",
-    "Colombo",
-    "Galle",
-    "Gampaha",
-    "Hambantota",
-    "Jaffna",
-    "Kalutara",
-    "Kandy",
-    "Kegalle",
-    "Kilinochchi",
-    "Kurunegala",
-    "Mannar",
-    "Matale",
-    "Matara",
-    "Monaragala",
-    "Mullaitivu",
-    "Nuwara Eliya",
-    "Polonnaruwa",
-    'Puttalam',
-    "Ratnapura",
-    "Trincomalee",
-    "Vavuniya"
-  ];
 
   final List<String> rating = ["All", "1.0", "2.0", "3.0", "4.0", "5.0"];
 
@@ -94,7 +31,7 @@ class FindScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: TextField(
-                  // controller: parentController.searchController,
+                  controller: findScreenController.searchController,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         color: Colors.black,
                       ),
@@ -133,7 +70,9 @@ class FindScreen extends StatelessWidget {
                     labelText: 'Search',
                   ),
                   onEditingComplete: () {
-                    print("searching");
+                    // print("searching");
+                    findScreenController.filterBySearch(
+                        findScreenController.searchController.text);
                   }),
             ),
 
@@ -147,36 +86,54 @@ class FindScreen extends StatelessWidget {
                   children: [
                     //districts in Sri Lanka
                     Expanded(
-                      child: DropdownButtonFormField<String>(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                      child: Obx(
+                        () => DropdownButtonFormField<String>(
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Please select Location';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 5,
+                            ),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 15,
-                            vertical: 5,
+                          //location icon
+                          icon: const Icon(
+                            Icons.location_on,
+                            color: cPrimaryColor,
                           ),
-                        ),
-                        //location icon
-                        icon: const Icon(
-                          Icons.location_on,
-                          color: cPrimaryColor,
-                        ),
-                        value: "All",
-                        items: districtNames
-                            .map(
-                              (district) => DropdownMenuItem(
-                                value: district,
-                                child: Text(
-                                  district,
-                                  style: Theme.of(context).textTheme.bodySmall,
+                          hint: Text(
+                            'Select Location',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                          items: findScreenController.locationsList
+                              .map(
+                                (district) => DropdownMenuItem(
+                                  value: district.id,
+                                  child: Text(
+                                    district.name,
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
                                 ),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (value) {},
+                              )
+                              .toList(),
+                          onChanged: (value) {
+                            findScreenController.selectedLocation.value =
+                                value!;
+                            findScreenController.filterByLocation(value);
+
+                            // print(value);
+                          },
+                        ),
                       ),
                     ),
                     // filter rating
@@ -212,7 +169,10 @@ class FindScreen extends StatelessWidget {
                             )
                             .toList(),
 
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          findScreenController.selectedRating.value = value!;
+                          findScreenController.filterByRating(value);
+                        },
                       ),
                     ),
                   ],
@@ -229,7 +189,7 @@ class FindScreen extends StatelessWidget {
             else
               Obx(
                 () => ListView.builder(
-                  itemCount: findScreenController.servicesList.length,
+                  itemCount: findScreenController.filteredServicesList.length,
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
@@ -253,7 +213,9 @@ class FindScreen extends StatelessWidget {
                         child: InkWell(
                           borderRadius: BorderRadius.circular(10),
                           onTap: () {
-                            Get.toNamed("/view-post-screen");
+                            Get.toNamed("/view-post-screen",
+                                arguments: findScreenController
+                                    .filteredServicesList[index]);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
