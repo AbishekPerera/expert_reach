@@ -248,4 +248,80 @@ class ServicesService extends SessionService {
       return null;
     }
   }
+
+  //get times
+  Future<dynamic> getTimes(String serviceProviderId, String date) async {
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "getTimes",
+          "param": {
+            "service_provider_id": serviceProviderId,
+            "date": date,
+          }
+        };
+
+        // print(json);
+        // return;
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  Future<dynamic> addBooking(String serviceProviderId, String serviceId,
+      String date, String timeFrom, String notes) async {
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "addBooking",
+          "param": {
+            "service_provider_id": serviceProviderId,
+            "service_id": serviceId,
+            "date": date,
+            "time_from": timeFrom,
+            "notes": notes
+          }
+        };
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 }

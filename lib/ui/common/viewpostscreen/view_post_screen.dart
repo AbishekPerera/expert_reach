@@ -61,7 +61,10 @@ class ViewPostScreen extends StatelessWidget {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.toNamed("/add-inquiry-screen");
+            Get.toNamed("/add-inquiry-screen",
+                arguments: _viewPostScreenController.arguments);
+            // print(_viewPostScreenController.arguments.services.id +
+            //     _viewPostScreenController.arguments.users.id);
           },
           backgroundColor: cPrimaryColor,
           child: const Icon(
@@ -154,10 +157,10 @@ class ViewPostScreen extends StatelessWidget {
                         ),
                         onTap: () {},
                         child: Ink(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [cPrimaryColor, cAccentColor],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
