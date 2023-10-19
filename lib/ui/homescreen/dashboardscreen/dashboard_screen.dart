@@ -11,83 +11,90 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // :::::::::::::::::::::::::::::::::::::::::::: Search Bar ::::::::::::::::::::::::::::::
+    return RefreshIndicator(
+      onRefresh: () async {
+        dashboardController.getSuggestedServices();
+      },
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(
+          parent: BouncingScrollPhysics(),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // :::::::::::::::::::::::::::::::::::::::::::: Search Bar ::::::::::::::::::::::::::::::
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: TextField(
-                // controller: parentController.searchController,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: Colors.black,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              child: TextField(
+                  // controller: parentController.searchController,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: Colors.black,
+                      ),
+                  cursorColor: Colors.grey,
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(
+                      Icons.search,
+                      color: Colors.grey,
                     ),
-                cursorColor: Colors.grey,
-                decoration: InputDecoration(
-                  suffixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.grey,
+                    // focusColor: Colors.white,
+
+                    // filled: true,
+                    // fillColor: Colors.grey[800],
+                    labelStyle: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(color: Colors.grey),
+                    floatingLabelStyle: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(color: Colors.black),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: cPrimaryColor),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: cAccentColor),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+
+                    labelText: 'Search',
                   ),
-                  // focusColor: Colors.white,
+                  onEditingComplete: () {
+                    print("searching");
+                  }),
+            ),
 
-                  // filled: true,
-                  // fillColor: Colors.grey[800],
-                  labelStyle: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(color: Colors.grey),
-                  floatingLabelStyle: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(color: Colors.black),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: cPrimaryColor),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: cAccentColor),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+            // :::::::::::::::::::::::::::::::::::::::::::: Carousel Slider ::::::::::::::::::::::::::::::
 
-                  labelText: 'Search',
-                ),
-                onEditingComplete: () {
-                  print("searching");
-                }),
-          ),
+            const CustomCarouselSlider(),
 
-          // :::::::::::::::::::::::::::::::::::::::::::: Carousel Slider ::::::::::::::::::::::::::::::
+            // :::::::::::::::::::::::::::::::::::::::::::: Suggested List ::::::::::::::::::::::::::::::
 
-          const CustomCarouselSlider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+              child: Text("Suggested for you",
+                  style: Theme.of(context).textTheme.displaySmall),
+            ),
 
-          // :::::::::::::::::::::::::::::::::::::::::::: Suggested List ::::::::::::::::::::::::::::::
+            const SizedBox(
+              height: 10,
+            ),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-            child: Text("Suggested for you",
-                style: Theme.of(context).textTheme.displaySmall),
-          ),
+            SuggestedForYouWidget(
+                dashboardItems: dashboardController.servicesList),
 
-          const SizedBox(
-            height: 10,
-          ),
-
-          SuggestedForYouWidget(
-              dashboardItems: dashboardController.servicesList),
-
-          const SizedBox(
-            height: 20,
-          )
-        ],
+            const SizedBox(
+              height: 50,
+            )
+          ],
+        ),
       ),
     );
   }

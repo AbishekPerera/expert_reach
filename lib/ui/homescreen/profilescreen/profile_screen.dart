@@ -19,6 +19,7 @@ class ProfileScreen extends StatelessWidget {
       onRefresh: () async {
         profileController.getUserData();
         profileController.getServicesByUserId();
+        profileController.getSearchTermsByUserId();
       },
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(
@@ -209,6 +210,57 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                             ),
                           )),
+                      const Divider(),
+                      Material(
+                          color:
+                              Get.isDarkMode ? Colors.grey[800] : Colors.white,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          elevation: 2,
+                          child: Obx(
+                              () => profileController.isLoading.value == true
+                                  ? const LinearProgressIndicator()
+                                  : SizedBox(
+                                      width: double.infinity,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 15, vertical: 10),
+                                            child: TextField(
+                                              controller: profileController
+                                                  .searchTermsController,
+                                              decoration: InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: "Your Keywords",
+                                                hintStyle: const TextStyle(
+                                                  color: Colors.grey,
+                                                ),
+                                                prefixIcon: const Icon(
+                                                  Icons.keyboard_alt_outlined,
+                                                  size: 40,
+                                                  color: Colors.grey,
+                                                ),
+                                                suffixIcon: IconButton(
+                                                  onPressed: () {
+                                                    profileController
+                                                        .addSearchTerms();
+                                                  },
+                                                  icon: const Icon(
+                                                    Icons.update_outlined,
+                                                    size: 26,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ))),
                     ]),
               ),
             ),

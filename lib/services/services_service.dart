@@ -559,4 +559,68 @@ class ServicesService extends SessionService {
       return null;
     }
   }
+
+  Future<dynamic> getSearchTermsByUserId() async {
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "getSearchTermsByUserId",
+          "param": {}
+        };
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  Future<dynamic> addSearchTerms(String text) async {
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "addSearchTerms",
+          "param": {
+            "search_terms": text,
+          }
+        };
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 }

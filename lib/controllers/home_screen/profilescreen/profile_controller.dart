@@ -23,7 +23,10 @@ class ProfileController extends GetxController {
     await servicesService.initService();
     getUserData();
     getServicesByUserId();
+    getSearchTermsByUserId();
   }
+
+  TextEditingController searchTermsController = TextEditingController();
 
   //get user data from sharefd preferences
   void getUserData() async {
@@ -63,6 +66,29 @@ class ProfileController extends GetxController {
     isLoading(false);
   }
 
+  //get getSearchTermsByUserId
+  void getSearchTermsByUserId() async {
+    isLoading(true);
+
+    final response = await servicesService.getSearchTermsByUserId();
+
+    // print(response);
+
+    if (response != null) {
+      if (response['response']['state'] == 200) {
+        searchTermsController.text =
+            response['response']['results'][0]['user_keywords_keywords'];
+      } else {
+        getErrorSnackBar("Bad Request", response['response']['message']);
+      }
+    } else {
+      getErrorSnackBar(
+          "Bad Request", "Something went wrong please Login again");
+    }
+
+    isLoading(false);
+  }
+
   void logout() {
     Get.defaultDialog(
       title: "Logout",
@@ -76,5 +102,27 @@ class ProfileController extends GetxController {
         Get.offAllNamed("/login");
       },
     );
+  }
+
+  void addSearchTerms() async {
+    isLoading(true);
+
+    final response =
+        await servicesService.addSearchTerms(searchTermsController.text);
+
+    // print(response);
+
+    if (response != null) {
+      if (response['response']['state'] == 200) {
+        getSearchTermsByUserId();
+      } else {
+        getErrorSnackBar("Bad Request", response['response']['message']);
+      }
+    } else {
+      getErrorSnackBar(
+          "Bad Request", "Something went wrong please Login again");
+    }
+
+    isLoading(false);
   }
 }
