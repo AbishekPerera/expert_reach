@@ -2,7 +2,6 @@ import 'package:expert_reach/constants/api_endpoint.dart';
 import 'package:expert_reach/constants/colors.dart';
 import 'package:expert_reach/constants/image_strings.dart';
 import 'package:expert_reach/controllers/common/addinquiryscreen/add_inquiry_screen.dart';
-import 'package:expert_reach/models/entities/availabletime.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
