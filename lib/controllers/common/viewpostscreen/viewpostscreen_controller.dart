@@ -36,14 +36,14 @@ class ViewPostScreenController extends GetxController {
   Future<void> getArgumentData() async {
     isLoading(true);
     bannerImage.value = arguments.services.image;
-    profileImage.value = servicesService.profile_img!;
+    profileImage.value = arguments.users.profile_img;
     title.value = arguments.services.title;
     description.value = arguments.services.description;
     price.value = arguments.services.rates;
     location.value = arguments.locations.name;
     stars.value = double.parse(arguments.stars.toString());
     serviceProviderName.value =
-        "${servicesService.first_name} ${servicesService.last_name}";
+        "${arguments.users.first_name} ${arguments.users.last_name}";
     isLoading(false);
   }
 

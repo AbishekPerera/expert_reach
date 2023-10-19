@@ -1,6 +1,5 @@
 import 'package:expert_reach/constants/api_endpoint.dart';
 import 'package:expert_reach/constants/colors.dart';
-import 'package:expert_reach/constants/image_strings.dart';
 import 'package:expert_reach/controllers/home_screen/inquiriesscreen/yourinquiries_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -314,7 +313,12 @@ class YourInquiriesWidget extends StatelessWidget {
                     //clear button
                     const Spacer(),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.back();
+                          Get.toNamed("/rate-and-review",
+                              arguments: _yourInquiriesControllers
+                                  .filterBusltList[index]);
+                        },
                         icon: const Icon(
                           Icons.messenger_outline,
                           color: Colors.green,

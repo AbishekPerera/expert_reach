@@ -454,4 +454,77 @@ class ServicesService extends SessionService {
       return null;
     }
   }
+
+  Future<dynamic> getRateAndReviewByUserIdAndServiceId(String id) async {
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "getRateAndReviewByUserIdAndServiceId",
+          "param": {
+            "service_id": id,
+          }
+        };
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  Future<dynamic> addUpdateRateAndReviewByUserIdAndServiceId(
+      String service_id, String rating, String review) async {
+    // print(service_id);
+    // print(rating);
+    // print(review);
+
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "addUpdateRateAndReviewByUserIdAndServiceId",
+          "param": {
+            "service_id": service_id,
+            "feedback": review,
+            "stars": rating
+          }
+        };
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 }

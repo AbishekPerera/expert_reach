@@ -21,7 +21,8 @@ class ProfileScreen extends StatelessWidget {
         profileController.getServicesByUserId();
       },
       child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         child: Column(
           children: [
             Container(

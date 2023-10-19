@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
   final screens = [
     Dashboard(),
     FindScreen(),
-    InquiriesScreen(),
+    const InquiriesScreen(),
     ProfileScreen()
   ];
 
