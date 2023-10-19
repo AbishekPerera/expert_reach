@@ -2,24 +2,10 @@ import 'package:expert_reach/constants/colors.dart';
 import 'package:expert_reach/ui/common/suggestedforyouwidget/suggestedforyouwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:expert_reach/constants/image_strings.dart';
 import 'package:expert_reach/controllers/home_screen/dashboardscreen/dashboard_controller.dart';
 import 'package:expert_reach/ui/homescreen/dashboardscreen/customcarousel_slider.dart';
 
 class Dashboard extends StatelessWidget {
-  final List<Map> _dashboardItems = [
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": adults1,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": adults2,
-    }
-  ];
-
   final DashboardController dashboardController =
       Get.put(DashboardController());
 
@@ -95,7 +81,8 @@ class Dashboard extends StatelessWidget {
             height: 10,
           ),
 
-          SuggestedForYouWidget(dashboardItems: _dashboardItems),
+          SuggestedForYouWidget(
+              dashboardItems: dashboardController.servicesList),
 
           const SizedBox(
             height: 20,

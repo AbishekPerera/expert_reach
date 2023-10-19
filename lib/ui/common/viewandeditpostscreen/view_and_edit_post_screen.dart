@@ -1,6 +1,6 @@
 import 'package:expert_reach/constants/api_endpoint.dart';
 import 'package:expert_reach/constants/colors.dart';
-import 'package:expert_reach/constants/image_strings.dart';
+
 import 'package:expert_reach/controllers/common/viewandeditpostscreen/viewandeditpostscreen_controller.dart';
 import 'package:expert_reach/ui/common/suggestedforyouwidget/suggestedforyouwidget.dart';
 import 'package:flutter/material.dart';
@@ -12,49 +12,6 @@ class ViewAndEditPostScreen extends StatelessWidget {
 
   final ViewAndEditPostScreenController _getxcontroller =
       Get.put(ViewAndEditPostScreenController());
-
-  final List<Map> _dashboardItems = [
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": adults1,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": adults2,
-    },
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": adults1,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": adults2,
-    },
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": adults1,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": adults2,
-    },
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": adults1,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": adults2,
-    }
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -435,8 +392,8 @@ class ViewAndEditPostScreen extends StatelessWidget {
                 )),
                 // suggestions
                 SliverToBoxAdapter(
-                    child:
-                        SuggestedForYouWidget(dashboardItems: _dashboardItems)),
+                    child: SuggestedForYouWidget(
+                        dashboardItems: _getxcontroller.servicesLists)),
               ],
             );
           }

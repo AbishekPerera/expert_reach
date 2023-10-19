@@ -13,49 +13,6 @@ class ViewPostScreen extends StatelessWidget {
   final ViewPostScreenController _viewPostScreenController =
       Get.put(ViewPostScreenController());
 
-  final List<Map> _dashboardItems = [
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": adults1,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": adults2,
-    },
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": adults1,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": adults2,
-    },
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": adults1,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": adults2,
-    },
-    {
-      "title": "Italian classes",
-      "subtitle": "this is a subtitle",
-      "image": adults1,
-    },
-    {
-      "title": "English classes",
-      "subtitle": "this is a subtitle",
-      "image": adults2,
-    }
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -491,8 +448,9 @@ class ViewPostScreen extends StatelessWidget {
                 )),
                 // suggestions
                 SliverToBoxAdapter(
-                    child:
-                        SuggestedForYouWidget(dashboardItems: _dashboardItems)),
+                    child: SuggestedForYouWidget(
+                        dashboardItems:
+                            _viewPostScreenController.servicesLists)),
               ],
             );
           }

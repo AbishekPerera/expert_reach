@@ -17,7 +17,7 @@ class FindScreenController extends GetxController {
 
   RxList<Locations> locationsList = RxList<Locations>([]);
   var selectedLocation = "".obs;
-  var selectedRating = "".obs;
+  var selectedRating = "All".obs;
 
   TextEditingController searchController = TextEditingController();
 
@@ -92,6 +92,11 @@ class FindScreenController extends GetxController {
   }
 
   void filterBySearch(String search) {
+    filteredServicesList.value = servicesList;
+    //clear selected rating and location
+    selectedLocation.value = "";
+    selectedRating.value = "All";
+
     filteredServicesList.value = filteredServicesList
         .where((element) => element.services.title
             .toLowerCase()

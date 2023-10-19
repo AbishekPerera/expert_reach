@@ -37,9 +37,15 @@ class FindScreen extends StatelessWidget {
                       ),
                   cursorColor: Colors.grey,
                   decoration: InputDecoration(
-                    suffixIcon: const Icon(
-                      Icons.search,
-                      color: Colors.grey,
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        findScreenController.filterBySearch(
+                            findScreenController.searchController.text);
+                      },
+                      icon: const Icon(
+                        Icons.search,
+                        color: Colors.grey,
+                      ),
                     ),
                     // focusColor: Colors.white,
 
@@ -88,6 +94,10 @@ class FindScreen extends StatelessWidget {
                     Expanded(
                       child: Obx(
                         () => DropdownButtonFormField<String>(
+                          value:
+                              findScreenController.selectedLocation.value == ""
+                                  ? null
+                                  : findScreenController.selectedLocation.value,
                           validator: (value) {
                             if (value == null) {
                               return 'Please select Location';
@@ -141,38 +151,43 @@ class FindScreen extends StatelessWidget {
                       width: 10,
                     ),
                     Expanded(
-                      child: DropdownButtonFormField(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                      child: Obx(
+                        () => DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 5),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 5),
-                        ),
-                        //rating icon
-                        icon: const Icon(
-                          Icons.star_half_sharp,
-                          color: cPrimaryColor,
-                        ),
-                        value: "All",
-                        items: rating
-                            .map(
-                              (rate) => DropdownMenuItem(
-                                value: rate,
-                                child: Text(
-                                  rate,
-                                  style: Theme.of(context).textTheme.bodySmall,
+                          //rating icon
+                          icon: const Icon(
+                            Icons.star_half_sharp,
+                            color: cPrimaryColor,
+                          ),
+                          value: findScreenController.selectedRating.value == ""
+                              ? null
+                              : findScreenController.selectedRating.value,
+                          items: rating
+                              .map(
+                                (rate) => DropdownMenuItem(
+                                  value: rate,
+                                  child: Text(
+                                    rate,
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
                                 ),
-                              ),
-                            )
-                            .toList(),
+                              )
+                              .toList(),
 
-                        onChanged: (value) {
-                          findScreenController.selectedRating.value = value!;
-                          findScreenController.filterByRating(value);
-                        },
+                          onChanged: (value) {
+                            findScreenController.selectedRating.value = value!;
+                            findScreenController.filterByRating(value);
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -231,7 +246,7 @@ class FindScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Image.network(
-                                    "$userAdsURL${findScreenController.servicesList[index].services.image}",
+                                    "$userAdsURL${findScreenController.filteredServicesList[index].services.image}",
                                     height: 100,
                                   ),
                                 ),
@@ -252,7 +267,7 @@ class FindScreen extends StatelessWidget {
                                       Obx(
                                         () => Text(
                                           findScreenController
-                                              .servicesList[index]
+                                              .filteredServicesList[index]
                                               .services
                                               .title,
                                           style: Theme.of(context)
@@ -276,7 +291,7 @@ class FindScreen extends StatelessWidget {
                                                     BorderRadius.circular(3),
                                               ),
                                               child: Text(
-                                                  "by ${findScreenController.servicesList[index].users.first_name} ${findScreenController.servicesList[index].users.last_name}",
+                                                  "by ${findScreenController.filteredServicesList[index].users.first_name} ${findScreenController.filteredServicesList[index].users.last_name}",
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .labelSmall!
@@ -288,7 +303,7 @@ class FindScreen extends StatelessWidget {
                                           Obx(
                                             () => Text(
                                               findScreenController
-                                                  .servicesList[index]
+                                                  .filteredServicesList[index]
                                                   .services
                                                   .description,
                                               style: Theme.of(context)
@@ -310,7 +325,7 @@ class FindScreen extends StatelessWidget {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                "${findScreenController.servicesList[index].services.rates} LKR",
+                                                "${findScreenController.filteredServicesList[index].services.rates} LKR",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodySmall,
@@ -319,7 +334,8 @@ class FindScreen extends StatelessWidget {
                                                 itemSize: 15,
                                                 initialRating: double.parse(
                                                     findScreenController
-                                                        .servicesList[index]
+                                                        .filteredServicesList[
+                                                            index]
                                                         .stars),
                                                 minRating: 1,
                                                 direction: Axis.horizontal,
