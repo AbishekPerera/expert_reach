@@ -485,119 +485,125 @@ class YourInquiriesWidget extends StatelessWidget {
                           // ),
                         ],
                       ),
-                      const Divider(
-                        color: Colors.white,
-                      ),
 
                       // contact details
-                      Material(
-                        type: MaterialType.transparency,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // :::::::::::::::::::::::::::::::::::::::::::: Phone ::::::::::::::::::::::::::::::
-                            ListTile(
-                              onTap: () async {
-                                final call = Uri.parse(
-                                    'tel:${_yourInquiriesControllers.filterBusltList[index].users.phone}');
-                                if (await canLaunchUrl(call)) {
-                                  launchUrl(call);
-                                } else {
-                                  throw 'Could not launch $call';
-                                }
-                              },
-                              leading: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
+                      _yourInquiriesControllers
+                                  .filterBusltList[index].bookings.status !=
+                              "Approved"
+                          ? const SizedBox()
+                          : Material(
+                              type: MaterialType.transparency,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Divider(
                                     color: Colors.white,
                                   ),
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.phone,
-                                    color: Colors.yellow,
-                                  ),
-                                ),
-                              ),
-                              title: Obx(
-                                () => Text(
-                                  " ${_yourInquiriesControllers.filterBusltList[index].users.phone}",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                        color: Colors.white,
-                                      ),
-                                ),
-                              ),
-                              //send msg
-                              trailing: IconButton(
-                                onPressed: () async {
-                                  final sms = Uri.parse(
-                                      'sms:${_yourInquiriesControllers.filterBusltList[index].users.phone}');
-                                  if (await canLaunchUrl(sms)) {
-                                    launchUrl(sms);
-                                  } else {
-                                    throw 'Could not launch $sms';
-                                  }
-                                },
-                                icon: const Icon(
-                                  Icons.message_outlined,
-                                  color: Colors.yellow,
-                                ),
-                              ),
-                            ),
-
-                            const Divider(
-                              color: Colors.white,
-                            ),
-
-                            // :::::::::::::::::::::::::::::::::::::::::::: Email ::::::::::::::::::::::::::::::
-
-                            ListTile(
-                                // border
-
-                                onTap: () async {
-                                  final email = Uri.parse(
-                                      'mailto:${_yourInquiriesControllers.filterBusltList[index].users.email}');
-                                  if (await canLaunchUrl(email)) {
-                                    launchUrl(email);
-                                  } else {
-                                    throw 'Could not launch $email';
-                                  }
-                                },
-                                leading: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.white,
-                                    ),
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.email,
-                                      color: Colors.yellow,
-                                    ),
-                                  ),
-                                ),
-                                title: Obx(
-                                  () => Text(
-                                    " ${_yourInquiriesControllers.filterBusltList[index].users.email}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall!
-                                        .copyWith(
+                                  // :::::::::::::::::::::::::::::::::::::::::::: Phone ::::::::::::::::::::::::::::::
+                                  ListTile(
+                                    onTap: () async {
+                                      final call = Uri.parse(
+                                          'tel:${_yourInquiriesControllers.filterBusltList[index].users.phone}');
+                                      if (await canLaunchUrl(call)) {
+                                        launchUrl(call);
+                                      } else {
+                                        throw 'Could not launch $call';
+                                      }
+                                    },
+                                    leading: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
                                           color: Colors.white,
                                         ),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Icon(
+                                          Icons.phone,
+                                          color: Colors.yellow,
+                                        ),
+                                      ),
+                                    ),
+                                    title: Obx(
+                                      () => Text(
+                                        " ${_yourInquiriesControllers.filterBusltList[index].users.phone}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall!
+                                            .copyWith(
+                                              color: Colors.white,
+                                            ),
+                                      ),
+                                    ),
+                                    //send msg
+                                    trailing: IconButton(
+                                      onPressed: () async {
+                                        final sms = Uri.parse(
+                                            'sms:${_yourInquiriesControllers.filterBusltList[index].users.phone}');
+                                        if (await canLaunchUrl(sms)) {
+                                          launchUrl(sms);
+                                        } else {
+                                          throw 'Could not launch $sms';
+                                        }
+                                      },
+                                      icon: const Icon(
+                                        Icons.message_outlined,
+                                        color: Colors.yellow,
+                                      ),
+                                    ),
                                   ),
-                                )),
-                          ],
-                        ),
-                      ),
+
+                                  const Divider(
+                                    color: Colors.white,
+                                  ),
+
+                                  // :::::::::::::::::::::::::::::::::::::::::::: Email ::::::::::::::::::::::::::::::
+
+                                  ListTile(
+                                      // border
+
+                                      onTap: () async {
+                                        final email = Uri.parse(
+                                            'mailto:${_yourInquiriesControllers.filterBusltList[index].users.email}');
+                                        if (await canLaunchUrl(email)) {
+                                          launchUrl(email);
+                                        } else {
+                                          throw 'Could not launch $email';
+                                        }
+                                      },
+                                      leading: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Colors.white,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Icon(
+                                            Icons.email,
+                                            color: Colors.yellow,
+                                          ),
+                                        ),
+                                      ),
+                                      title: Obx(
+                                        () => Text(
+                                          " ${_yourInquiriesControllers.filterBusltList[index].users.email}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall!
+                                              .copyWith(
+                                                color: Colors.white,
+                                              ),
+                                        ),
+                                      )),
+                                ],
+                              ),
+                            ),
                     ],
                   ),
                 ),
