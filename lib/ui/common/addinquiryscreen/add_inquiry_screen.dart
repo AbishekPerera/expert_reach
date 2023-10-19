@@ -127,11 +127,11 @@ class AddInquiryScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               const Icon(
-                                Icons.star,
+                                Icons.money,
                                 color: Colors.yellow,
                               ),
                               Text(
-                                "${_addInquiryController.arguments.stars}",
+                                " ${_addInquiryController.arguments.services.rates} / hour",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!

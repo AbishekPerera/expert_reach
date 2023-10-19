@@ -251,6 +251,61 @@ class ViewPostScreen extends StatelessWidget {
                   ),
                 ),
 
+                //service price
+                SliverToBoxAdapter(
+                  child: Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: const EdgeInsets.all(5),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      border: Border.fromBorderSide(
+                        BorderSide(
+                          color: Colors.grey,
+                        ),
+                      ),
+                      gradient: LinearGradient(
+                        colors: [cPrimaryColor, cAccentColor, Colors.green],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 5,
+                          color: Colors.black26,
+                          offset: Offset(0, 3),
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Service Price",
+                            style: Theme.of(context)
+                                .textTheme
+                                .displaySmall!
+                                .copyWith(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                )),
+                        Obx(
+                          () => Text(
+                              "${_viewPostScreenController.price.value} /=",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displaySmall!
+                                  .copyWith(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  )),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
                 SliverToBoxAdapter(
                     child: Container(
                   margin:

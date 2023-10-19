@@ -639,7 +639,7 @@ class YourInquiriesWidget extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50),
                               ),
                               child: const Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(3.0),
                                 child: Icon(
                                   Icons.location_on_outlined,
                                   color: Colors.green,
@@ -658,6 +658,7 @@ class YourInquiriesWidget extends StatelessWidget {
                                   style:
                                       Theme.of(context).textTheme.headlineSmall,
                                   textAlign: TextAlign.start,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ],
                             ),
@@ -686,6 +687,7 @@ class YourInquiriesWidget extends StatelessWidget {
                                         .copyWith(
                                           color: Colors.white,
                                         ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ],

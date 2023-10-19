@@ -388,4 +388,70 @@ class ServicesService extends SessionService {
       return null;
     }
   }
+
+  // getBookingsByServiceProviderId
+  Future<dynamic> getBookingsByServiceProviderId() async {
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "getBookingsByServiceProviderId",
+          "param": {}
+        };
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  Future<dynamic> updateBookingStatus(String id, String status) async {
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "updateBookingStatus",
+          "param": {
+            "booking_id": id,
+            "status": status,
+          }
+        };
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 }
