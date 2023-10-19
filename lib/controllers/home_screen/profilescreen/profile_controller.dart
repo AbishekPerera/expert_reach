@@ -76,8 +76,10 @@ class ProfileController extends GetxController {
 
     if (response != null) {
       if (response['response']['state'] == 200) {
-        searchTermsController.text =
-            response['response']['results'][0]['user_keywords_keywords'];
+        if (response['response']['results'].length > 0) {
+          searchTermsController.text =
+              response['response']['results'][0]['user_keywords_keywords'];
+        }
       } else {
         getErrorSnackBar("Bad Request", response['response']['message']);
       }
