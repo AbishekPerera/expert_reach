@@ -457,6 +457,192 @@ class ProfileScreen extends StatelessWidget {
             ),
 
             SizedBox(height: screen_width * 0.02),
+
+            const Divider(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Material(
+                  color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  elevation: 2,
+                  child: Obx(
+                    () => ListTile(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              //admin login dialog (form)
+                              return AlertDialog(
+                                title: const Text("Admin Login"),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Form(
+                                        key:
+                                            profileController.adminloginFormKey,
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 20.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              TextFormField(
+                                                decoration:
+                                                    const InputDecoration(
+                                                  prefixIcon: Icon(Icons
+                                                      .alternate_email_outlined),
+                                                  labelText: "Email ",
+                                                  hintText: "abc@domain.com",
+                                                  border: OutlineInputBorder(),
+                                                ),
+                                                controller: profileController
+                                                    .adminEmailController,
+                                                onSaved: (value) {
+                                                  profileController.userName =
+                                                      value!;
+                                                },
+                                                validator: (value) {
+                                                  if (!value!.isEmail) {
+                                                    return "Please enter your email";
+                                                  } else {
+                                                    return null;
+                                                  }
+                                                },
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Obx(
+                                                () => TextFormField(
+                                                  decoration: InputDecoration(
+                                                      prefixIcon: const Icon(Icons
+                                                          .fingerprint_outlined),
+                                                      labelText: "Password ",
+                                                      hintText: "*********",
+                                                      border:
+                                                          const OutlineInputBorder(),
+                                                      suffixIcon: IconButton(
+                                                          onPressed: () {
+                                                            profileController
+                                                                .togglePassword();
+                                                          },
+                                                          icon: profileController
+                                                                  .obscurePWText
+                                                                  .value
+                                                              ? const Icon(Icons
+                                                                  .visibility_outlined)
+                                                              : const Icon(Icons
+                                                                  .visibility_off_outlined))),
+                                                  obscureText: profileController
+                                                      .obscurePWText.value,
+                                                  controller: profileController
+                                                      .adminPasswordController,
+                                                  onSaved: (value) {
+                                                    profileController.password =
+                                                        value!;
+                                                  },
+                                                  validator: (value) {
+                                                    if (value!.length < 6) {
+                                                      return "Password must be at least 6 characters";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
+                                              TextButton(
+                                                  onPressed: () {},
+                                                  child: Text(
+                                                      "Forget Password ?",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelSmall)),
+                                              Obx(
+                                                () => SizedBox(
+                                                    width: double.infinity,
+                                                    child: profileController
+                                                                .isLoading
+                                                                .value ==
+                                                            true
+                                                        ? const Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    10.0),
+                                                            child:
+                                                                LinearProgressIndicator(),
+                                                          )
+                                                        : ElevatedButton(
+                                                            onPressed: () {
+                                                              profileController
+                                                                  .adminLogin();
+                                                            },
+                                                            child: const Text(
+                                                                "SIGN IN"))),
+                                              ),
+
+                                              // :::::::::::::::::::::::::::::::::::::::::::::::: or Register
+                                            ],
+                                          ),
+                                        )),
+                                    // TextField(
+                                    //   // controller: profileController
+                                    //   //     .adminEmailController,
+                                    //   decoration: const InputDecoration(
+                                    //     hintText: "Email",
+                                    //   ),
+                                    // ),
+                                    // TextField(
+                                    //   // controller: profileController
+                                    //   //     .adminPasswordController,
+                                    //   decoration: const InputDecoration(
+                                    //     hintText: "Password",
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      child: const Text("Cancel")),
+                                ],
+                              );
+                            });
+                      },
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      leading: const Icon(
+                        Icons.admin_panel_settings_outlined,
+                        size: 40,
+                      ),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        size: 20,
+                      ),
+                      title: Text(
+                        "Are you a Admin?",
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      subtitle: profileController.isLoading.value == true
+                          ? const LinearProgressIndicator()
+                          : Text(
+                              "you can login as a admin",
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                    ),
+                  )),
+            ),
+
+            SizedBox(height: screen_width * 0.02),
           ],
         ),
       ),

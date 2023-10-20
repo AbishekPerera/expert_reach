@@ -623,4 +623,34 @@ class ServicesService extends SessionService {
       return null;
     }
   }
+
+  Future<dynamic> adminLogin(String userName, String password) async {
+    try {
+      final Map<String, String> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      };
+
+      // print(headers);
+      final Map<String, dynamic> json = {
+        "name": "adminLogin",
+        "param": {
+          "email": userName,
+          "password": password,
+        }
+      };
+
+      final response = await http.post(Uri.parse(baseURL),
+          headers: headers, body: jsonEncode(json));
+
+      final responseData = jsonDecode(response.body);
+
+      return responseData;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return null;
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:expert_reach/ui/admin/admin_dashboard.dart';
 import 'package:expert_reach/ui/common/addinquiryscreen/add_inquiry_screen.dart';
 import 'package:expert_reach/ui/common/addservice/addservicescreen.dart';
 import 'package:expert_reach/ui/common/rateandreview/rateandreviewscreen.dart';
@@ -28,4 +29,7 @@ var appRoutes = [
   GetPage(name: "/edit-post-screen", page: () => EditServiceScreen()),
   GetPage(name: "/add-inquiry-screen", page: () => AddInquiryScreen()),
   GetPage(name: "/rate-and-review", page: () => RateSAndReviewScreen()),
+
+  // admin routes
+  GetPage(name: "/admin-panel", page: () => AdminDashboardScreen()),
 ];
