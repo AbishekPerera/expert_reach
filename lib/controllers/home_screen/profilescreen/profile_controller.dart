@@ -171,7 +171,7 @@ class ProfileController extends GetxController {
               "admin_email", response['response']['results']['email']);
           Get.back();
           Get.toNamed("/admin-panel");
-          getSuccessSnackBar("Welcome back!", "You have successfully logged in",
+          getSuccessSnackBar("Welcome back!", "You have logged in as admin",
               Icons.done_all_outlined);
         } else {
           getErrorSnackBar("Bad Request", response['response']['message']);

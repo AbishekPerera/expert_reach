@@ -653,4 +653,64 @@ class ServicesService extends SessionService {
       return null;
     }
   }
+
+  Future<dynamic> updateServiceStatus(
+      String serviceId, String userId, String status) async {
+    try {
+      final Map<String, String> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      };
+
+      // print(headers);
+      final Map<String, dynamic> json = {
+        "name": "updateServiceStatus",
+        "param": {"service_id": serviceId, "user_id": userId, "status": status}
+      };
+
+      final response = await http.post(Uri.parse(baseURL),
+          headers: headers, body: jsonEncode(json));
+
+      final responseData = jsonDecode(response.body);
+
+      return responseData;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return null;
+    }
+  }
+
+  //getAllServices
+  Future<dynamic> getAllServicesAdmin() async {
+    if (isLogin) {
+      try {
+        final Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        // print(headers);
+        final Map<String, dynamic> json = {
+          "name": "getAllServicesAdmin",
+          "param": {}
+        };
+
+        final response = await http.post(Uri.parse(baseURL),
+            headers: headers, body: jsonEncode(json));
+
+        final responseData = jsonDecode(response.body);
+
+        return responseData;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 }

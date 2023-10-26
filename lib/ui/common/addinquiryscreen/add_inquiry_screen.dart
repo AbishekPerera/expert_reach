@@ -104,8 +104,10 @@ class AddInquiryScreen extends StatelessWidget {
                             children: [
                               Text(
                                 "${_addInquiryController.arguments.users.first_name} ${_addInquiryController.arguments.users.last_name}",
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(fontSize: 16),
                                 textAlign: TextAlign.start,
                               ),
                               Text(
@@ -131,7 +133,7 @@ class AddInquiryScreen extends StatelessWidget {
                                 color: Colors.yellow,
                               ),
                               Text(
-                                " ${_addInquiryController.arguments.services.rates} / hour",
+                                " ${_addInquiryController.arguments.services.rates}\n/hour",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!

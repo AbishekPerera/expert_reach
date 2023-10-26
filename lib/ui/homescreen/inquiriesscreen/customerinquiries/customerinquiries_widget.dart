@@ -276,7 +276,7 @@ class CustomerInquiriesWidget extends StatelessWidget {
             ),
 
             const SizedBox(
-              height: 20,
+              height: 200,
             )
           ],
         ),
@@ -1078,7 +1078,7 @@ class CustomerInquiriesWidget extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 10),
+                SizedBox(height: 20),
               ],
             ),
           ),

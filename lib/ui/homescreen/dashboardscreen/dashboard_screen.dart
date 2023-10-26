@@ -91,7 +91,7 @@ class Dashboard extends StatelessWidget {
                 dashboardItems: dashboardController.servicesList),
 
             const SizedBox(
-              height: 50,
+              height: 200,
             )
           ],
         ),

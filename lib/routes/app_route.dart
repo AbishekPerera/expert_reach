@@ -5,6 +5,7 @@ import 'package:expert_reach/ui/common/rateandreview/rateandreviewscreen.dart';
 import 'package:expert_reach/ui/common/viewandeditpostscreen/edit_post_screen.dart';
 import 'package:expert_reach/ui/common/viewandeditpostscreen/view_and_edit_post_screen.dart';
 import 'package:expert_reach/ui/common/viewpostscreen/view_post_screen.dart';
+import 'package:expert_reach/ui/common/viewpostscreen/view_post_screen_admin.dart';
 import 'package:expert_reach/ui/notifications/notifications.dart';
 import 'package:get/get.dart';
 import 'package:expert_reach/ui/homescreen/home_screen.dart';
@@ -32,4 +33,5 @@ var appRoutes = [
 
   // admin routes
   GetPage(name: "/admin-panel", page: () => AdminDashboardScreen()),
+  GetPage(name: "/view-post-screen-admin", page: () => ViewPostScreenAdmin()),
 ];

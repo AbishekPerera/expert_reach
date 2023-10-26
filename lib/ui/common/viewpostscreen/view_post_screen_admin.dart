@@ -1,30 +1,31 @@
 import 'package:expert_reach/constants/api_endpoint.dart';
 import 'package:expert_reach/constants/colors.dart';
-import 'package:expert_reach/controllers/common/viewpostscreen/viewpostscreen_controller.dart';
-import 'package:expert_reach/ui/common/suggestedforyouwidget/suggestedforyouwidget.dart';
+import 'package:expert_reach/controllers/common/viewpostscreen/viewpostscreen_admin_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
-class ViewPostScreen extends StatelessWidget {
-  ViewPostScreen({super.key});
+class ViewPostScreenAdmin extends StatelessWidget {
+  ViewPostScreenAdmin({super.key});
 
-  final ViewPostScreenController _viewPostScreenController =
-      Get.put(ViewPostScreenController());
+  final ViewPostScreenAdminController _viewPostScreenController =
+      Get.put(ViewPostScreenAdminController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.toNamed("/add-inquiry-screen",
-                arguments: _viewPostScreenController.arguments);
-            // print(_viewPostScreenController.arguments.services.id +
-            //     _viewPostScreenController.arguments.users.id);
+            _viewPostScreenController.updateServiceStatus();
           },
-          backgroundColor: cPrimaryColor,
-          child: const Icon(
-            Icons.chat,
+          backgroundColor:
+              _viewPostScreenController.arguments.services.is_active == '1'
+                  ? Colors.red
+                  : Colors.green,
+          child: Icon(
+            _viewPostScreenController.arguments.services.is_active == '1'
+                ? Icons.close
+                : Icons.check,
             color: Colors.white,
           ),
         ),
@@ -35,9 +36,7 @@ class ViewPostScreen extends StatelessWidget {
             );
           } else {
             return RefreshIndicator(
-              onRefresh: () async {
-                _viewPostScreenController.getSuggestedServices();
-              },
+              onRefresh: () async {},
               child: CustomScrollView(
                 physics: const AlwaysScrollableScrollPhysics(
                   parent: BouncingScrollPhysics(),
@@ -220,6 +219,7 @@ class ViewPostScreen extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 5),
                       padding: const EdgeInsets.all(5),
+                      height: 50,
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
@@ -264,6 +264,68 @@ class ViewPostScreen extends StatelessWidget {
                                       fontSize: 16,
                                     )),
                           ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  //status
+                  SliverToBoxAdapter(
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.all(5),
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        border: const Border.fromBorderSide(
+                          BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        gradient: LinearGradient(
+                          colors: _viewPostScreenController
+                                      .arguments.services.is_active ==
+                                  '1'
+                              ? [cPrimaryColor, cAccentColor, Colors.green]
+                              : [cPrimaryColor, Colors.redAccent],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                            blurRadius: 5,
+                            color: Colors.black26,
+                            offset: Offset(0, 3),
+                          )
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Status",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displaySmall!
+                                  .copyWith(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  )),
+                          Text(
+                              _viewPostScreenController
+                                          .arguments.services.is_active ==
+                                      '1'
+                                  ? "Active"
+                                  : "Inactive",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displaySmall!
+                                  .copyWith(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  )),
                         ],
                       ),
                     ),
@@ -423,11 +485,11 @@ class ViewPostScreen extends StatelessWidget {
                                                   allowHalfRating: true,
                                                   itemCount: 5,
                                                   ignoreGestures: true,
-                                                  itemPadding:
-                                                      EdgeInsets.symmetric(
-                                                          horizontal: 4.0),
+                                                  itemPadding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 4.0),
                                                   itemBuilder: (context, _) =>
-                                                      Icon(
+                                                      const Icon(
                                                     Icons.star,
                                                     color: Colors.amber,
                                                   ),
@@ -448,20 +510,20 @@ class ViewPostScreen extends StatelessWidget {
                     ),
                   )),
 
-                  SliverToBoxAdapter(
-                      child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text("Suggest For You",
-                        style:
-                            Theme.of(context).textTheme.displaySmall!.copyWith(
-                                  fontSize: 20,
-                                )),
-                  )),
-                  // suggestions
-                  SliverToBoxAdapter(
-                      child: SuggestedForYouWidget(
-                          dashboardItems:
-                              _viewPostScreenController.servicesLists)),
+                  // SliverToBoxAdapter(
+                  //     child: Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                  //   child: Text("Suggest For You",
+                  //       style:
+                  //           Theme.of(context).textTheme.displaySmall!.copyWith(
+                  //                 fontSize: 20,
+                  //               )),
+                  // )),
+                  // // suggestions
+                  // SliverToBoxAdapter(
+                  //     child: SuggestedForYouWidget(
+                  //         dashboardItems:
+                  //             _viewPostScreenController.servicesLists)),
                 ],
               ),
             );

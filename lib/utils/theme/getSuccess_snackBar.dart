@@ -8,7 +8,7 @@ void getSuccessSnackBar(String title, String body, IconData leadingIcon) {
     titleText: Text(title),
     messageText: Text(body),
     forwardAnimationCurve: Curves.decelerate,
-    duration: const Duration(milliseconds: 3000),
+    duration: const Duration(milliseconds: 2000),
     isDismissible: true,
     dismissDirection: DismissDirection.horizontal,
     overlayBlur: 5,

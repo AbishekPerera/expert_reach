@@ -77,8 +77,8 @@ class RateAndReviewController extends GetxController {
       if (response != null) {
         if (response['response']['state'] == 200) {
           Get.back();
-          getSuccessSnackBar("Success", response['response']['message'],
-              Icons.done_all_outlined);
+          getSuccessSnackBar(
+              "Success", "Review added successfully", Icons.done_all_outlined);
         } else {
           getErrorSnackBar("Bad Request", response['response']['message']);
         }

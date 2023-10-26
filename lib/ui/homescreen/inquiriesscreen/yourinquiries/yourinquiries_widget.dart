@@ -156,7 +156,7 @@ class YourInquiriesWidget extends StatelessWidget {
                                                     .title,
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyLarge,
+                                                    .bodyMedium,
                                               ),
                                               Text(
                                                 _yourInquiriesControllers
@@ -263,7 +263,7 @@ class YourInquiriesWidget extends StatelessWidget {
             ),
 
             const SizedBox(
-              height: 20,
+              height: 200,
             )
           ],
         ),
