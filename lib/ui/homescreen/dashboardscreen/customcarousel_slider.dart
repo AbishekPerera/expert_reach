@@ -30,20 +30,20 @@ class CustomCarouselSlider extends StatelessWidget {
           buildCarouselItem(
             context: context,
             backgroundImage: primipassi,
-            title: '"Primipassi" - The First Steps',
-            subtitle: 'Italian for Absolute Beginners (Kids)',
+            title: '"Creative Solutions Agency',
+            subtitle: 'Free PSD gradient marketing design template',
           ),
           buildCarouselItem(
             context: context,
             backgroundImage: avventura,
-            title: '"Avventura Italiana"',
-            subtitle: 'Italian for Beginners and Intermediate (Kids)',
+            title: '"EXPERT SERVICE"',
+            subtitle: 'Free vector mechanic landing page template',
           ),
           buildCarouselItem(
             context: context,
             backgroundImage: maestri,
-            title: '"Maestri di Italiano"',
-            subtitle: 'Advanced Italian (Kids)',
+            title: '"Expert Car Service"',
+            subtitle: 'test your car for free',
           ),
           buildCarouselItem(
             context: context,
@@ -56,13 +56,6 @@ class CustomCarouselSlider extends StatelessWidget {
             backgroundImage: adults2,
             title: '"Italiano per Adulti"',
             subtitle: 'Foundations for Adults (25+ years)',
-          ),
-          buildCarouselItem(
-            context: context,
-            backgroundImage: interaction,
-            title: '"Italian Interaction Sessions"',
-            subtitle:
-                'Open to all levels from absolute beginners to advanced learners',
           ),
         ],
       ),

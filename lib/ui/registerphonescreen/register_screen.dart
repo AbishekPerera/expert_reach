@@ -107,6 +107,7 @@ class RegisterScreen extends StatelessWidget {
                               if (value!.isEmpty) {
                                 return "First name is required";
                               }
+                              return null;
                             },
                           ),
                         ),
@@ -128,6 +129,7 @@ class RegisterScreen extends StatelessWidget {
                               if (value!.isEmpty) {
                                 return "Last name is required";
                               }
+                              return null;
                             },
                           ),
                         ),
@@ -151,6 +153,7 @@ class RegisterScreen extends StatelessWidget {
                         if (!value!.isEmail) {
                           return "Please enter a valid email";
                         }
+                        return null;
                       },
                     ),
                     const SizedBox(
@@ -172,6 +175,7 @@ class RegisterScreen extends StatelessWidget {
                         if (value!.length < 10) {
                           return "Phone number is required";
                         }
+                        return null;
                       },
                     ),
                     const SizedBox(
@@ -204,6 +208,7 @@ class RegisterScreen extends StatelessWidget {
                           if (value!.length < 8) {
                             return "Password must be of 8 chars";
                           }
+                          return null;
                         },
                       ),
                     ),
@@ -240,6 +245,7 @@ class RegisterScreen extends StatelessWidget {
                                   .passwordController!.text) {
                             return "Password does not match";
                           }
+                          return null;
                         },
                       ),
                     ),

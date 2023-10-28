@@ -23,7 +23,6 @@ class SplashScreenController extends GetxController {
           await userdata.clear();
           Get.offNamed("/login");
         }
-        Get.offNamed("/login");
       },
     );
   }
