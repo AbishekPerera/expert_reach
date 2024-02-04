@@ -2,6 +2,9 @@
 
 Welcome to the repository for the Expert Reach mobile app, a powerful platform connecting local professionals with clients. Built with Flutter, our app utilizes the GetX state management library and integrates various packages to enhance functionality and user experience.
 
+## Expert Reach
+![Expert Reach]([https://github.com/AbishekPerera/HerbCollab/blob/main/MicrosoftTeams-image%20(1).png?raw=true](https://github.com/AbishekPerera/expert_reach/blob/main/Expert%20Reach.png?raw=true))
+
 ## Key Packages Used
 
 - **google_fonts: ^5.1.0**
